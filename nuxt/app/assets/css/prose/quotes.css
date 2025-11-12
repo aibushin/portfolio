@@ -1,0 +1,10 @@
+/* ===== Цитаты ===== */
+.prose blockquote {
+  @apply my-6 pl-4 italic border-l-4 rounded-md py-3;
+  border-color: var(--p-primary-color);
+  background-color: var(--p-surface-100);
+  color: var(--p-text-muted-color);
+}
+.dark .prose blockquote {
+  background-color: var(--p-surface-900);
+}

@@ -1,0 +1,52 @@
+# Нужно настроить тестирование сервисов.
+# Для начала простой make lint
+# И встроить в CI github'а
+
+services:
+  postgres:
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Europe/Moscow
+      PGTZ: Europe/Moscow
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    expose:
+      - 5432
+    healthcheck:
+      test: "pg_isready -h postgres"
+      interval: 3s
+      timeout: 5s
+      retries: 5
+
+  # invest_bot:
+  #   build:
+  #     context: ./invest_bot
+  #     dockerfile: Dockerfile
+  #   command: make test
+  #   volumes:
+  #     - ./invest_bot:/app
+  #   environment:
+  #     POSTGRES_URL: ${POSTGRES_URL}
+  #     ENVIROMENT: ${ENVIROMENT:-test}
+  #     INVEST_TOKEN: ${INVEST_TOKEN}
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+
+  telegram_bot:
+    build:
+      context: ./telegram_bot
+      dockerfile: ../invest_bot/Dockerfile
+    command: make test
+    volumes:
+      - ./telegram_bot:/app
+    environment:
+      # POSTGRES_URL: ${POSTGRES_URL:-postgresql://postgres:postgres@postgres:5432/postgres}
+      POSTGRES_URL: ${POSTGRES_URL}
+      ENVIROMENT: ${ENVIROMENT:-test}
+      TG_API_TOKEN: ${TG_API_TOKEN}
+    depends_on:
+      postgres:
+        condition: service_healthy

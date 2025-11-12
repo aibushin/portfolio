@@ -1,0 +1,36 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules/
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+bin/
+postgres/
+
+.coverage
+**/__pycache__/
+
+backend/tests/mocks/last_merged_images/*
+backend/tests/mocks/ofd_responses_raw/*
+backend/tests/mocks/pdfs/*
+backend/tests/mocks/receipt_images/*
+backend/tests/mocks/test__cs2_scan_qr/*

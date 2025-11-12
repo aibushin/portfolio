@@ -1,0 +1,31 @@
+name: ci
+
+on: [workflow_call]
+
+jobs:
+  check_empty_files:
+    name: Checking for empty files and folders
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set EMPTY_FILES_CNT
+        run: |
+          echo "EMPTY_FILES_CNT=$(find . -not -path './postgres*' -empty | wc -l)" >> $GITHUB_ENV
+      - name: Check empty files and directories
+        if: ${{ env.EMPTY_FILES_CNT > 0 }}
+        run: |
+          echo -e "::error:: empty files ($EMPTY_FILES_CNT):\n$(find . -not -path './postgres*' -empty)"
+          exit 1
+  tests:
+    name: Project testing
+    needs: 
+      - check_empty_files
+    runs-on: ubuntu-latest
+    env:
+      POSTGRES_URL: ${{ vars.POSTGRES_URL }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run Docker Compose
+        run: docker compose -f docker-compose-test.yml run --rm telegram_bot make test

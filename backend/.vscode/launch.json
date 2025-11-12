@@ -1,0 +1,64 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "purpose": ["debug-test"],
+            "console": "integratedTerminal",
+            // "env": {
+            //     "PYTEST_ADDOPTS": "--no-cov"
+            // },
+            "justMyCode": false
+        },
+        {
+            "name": "back",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src.main",
+            "justMyCode": false,
+            "jinja": true
+        },
+        {
+            "name": "main",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "src/main.py",
+            "console": "integratedTerminal",
+            "env": {
+                "ENVIROMENT": "test"
+            },
+            "jinja": true
+        },
+        {
+            "name": "backend",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src",
+            "env": {
+                "ENVIROMENT": "test"
+            },
+            "jinja": true
+        },
+        {
+            "name": "uvicorn",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "src.main:app",
+                "--reload",
+                "--port",
+                "5050",
+                "--log-level",
+                "debug"
+            ],
+            "env": {
+                "ENVIROMENT": "test"
+            },
+            "jinja": true
+        }
+    ]
+}

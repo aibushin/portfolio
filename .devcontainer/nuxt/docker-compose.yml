@@ -1,0 +1,39 @@
+services:
+
+  nuxt:
+    command: tail -f /dev/null
+    volumes:
+      - ./.devcontainer:/app/.devcontainer
+      - ./.gitignore:/app/.gitignore
+      - ./docker-compose.yml:/app/docker-compose.yml
+      - ./info:/app/info
+
+  # nuxt:
+  #   build:
+  #     context: ../../nuxt
+  #     dockerfile: Dockerfile
+  #     target: build
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ../../nuxt:/app
+  #     - ../../.devcontainer:/app/.devcontainer
+  #     - ../../.gitignore:/app/.gitignore
+  #     - ../../docker-compose.yml:/app/docker-compose.yml
+  #     - ../../info:/app/info
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - t_api_default
+
+  # tuna:
+  #   image: yuccastream/tuna:latest
+  #   command: http nuxt:${FRONT_PORT} --inspect=false
+  #   restart: always
+  #   environment:
+  #     TUNA_TOKEN: ${TUNA_TOKEN}
+  #   depends_on:
+  #     - nuxt
+
+# networks:
+#   t_api_default:
+#     external: true

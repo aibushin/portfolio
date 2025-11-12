@@ -1,0 +1,60 @@
+{
+	"name": "backend",
+	"dockerComposeFile": [
+		"../../docker-compose.yml",
+		"docker-compose.yml"
+	],
+	"service": "backend",
+	"workspaceFolder": "/app",
+  	"shutdownAction": "none",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"[python]": {
+					"editor.formatOnSave": true,
+					"editor.defaultFormatter": "charliermarsh.ruff"
+				},
+				"[yaml]": {
+					"editor.defaultFormatter": "redhat.vscode-yaml"
+				},
+				"sqltools.connections": [
+					{
+						"previewLimit": 50,
+						"server": "postgres",
+						"port": 5432,
+						"driver": "PostgreSQL",
+						"name": "docker postgres",
+						"database": "postgres",
+						"username": "postgres",
+						"password": "postgres"
+					},
+					{
+						"previewLimit": 50,
+						"server": "aibushin.ru",
+						"port": 5432,
+						"askForPassword": true,
+						"driver": "PostgreSQL",
+						"name": "aibushin.ru",
+						"database": "postgres",
+						"username": "postgres"
+					}
+				]
+			},
+			"extensions": [
+				"charliermarsh.ruff",
+				"davidwang.ini-for-vscode",
+				"ms-python.python",
+				"tamasfe.even-better-toml",
+				"vscode-icons-team.vscode-icons",
+				"usernamehw.find-jump",
+				"mguellsegarra.highlight-on-copy",
+				"ryu1kn.partial-diff",
+				"yzhang.markdown-all-in-one",
+				"DavidAnson.vscode-markdownlint",
+				"almenon.arepl",
+				"usernamehw.errorlens",
+				"cweijan.vscode-postgresql-client2"
+			]
+		}
+	}
+}

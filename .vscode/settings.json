@@ -1,0 +1,14 @@
+{
+    "git.ignoreLimitWarning": true,
+    "markdownlint.config": {
+        "default": true,
+        "MD013": false
+    },
+    "[markdown]": {
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": false
+        }
+    }
+}

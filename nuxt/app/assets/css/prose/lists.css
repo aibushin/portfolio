@@ -1,0 +1,14 @@
+/* ===== Списки ===== */
+.prose ul { @apply pl-6 my-4 space-y-2 list-disc; }
+.prose ol { @apply pl-6 my-4 space-y-2 list-decimal; }
+
+.prose li {
+  @apply font-normal text-[var(--p-text-muted-color)];
+}
+
+/* Акцентируем маркеры */
+.prose :where(ul li)::marker,
+.prose :where(ol li)::marker {
+  color: var(--p-primary-color);
+  font-weight: bold;
+}

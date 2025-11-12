@@ -1,0 +1,39 @@
+{
+	"name": "nuxt",
+	"dockerComposeFile": ["../../docker-compose.yml", "docker-compose.yml"],
+	"service": "nuxt",
+	"workspaceFolder": "/app",
+	"shutdownAction": "none",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"[javascript]": {
+					"editor.codeActionsOnSave": {
+						"source.fixAll.eslint": "always"
+					},
+					"editor.formatOnSave": true,
+					"eslint.validate": [
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact"
+					],
+					"typescript.tsdk": "node_modules/typescript/lib",
+					"files.associations": {
+						"*.css": "tailwindcss",
+						"globals.css": "tailwindcss"
+					}
+				}
+			},
+			"extensions": [
+				"usernamehw.find-jump",
+				"mguellsegarra.highlight-on-copy",
+				"dbaeumer.vscode-eslint",
+				"bradlc.vscode-tailwindcss",
+				"Vue.volar",
+				"esbenp.prettier-vscode",
+				"ryu1kn.partial-diff"
+			]
+		}
+	}
+}

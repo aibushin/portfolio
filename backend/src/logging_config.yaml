@@ -1,0 +1,64 @@
+version: 1
+disable_existing_loggers: True
+formatters:
+  default:
+    (): uvicorn.logging.DefaultFormatter
+    format: '[%(asctime)s][%(levelname)s] [%(name)s]: %(message)s'
+    use_colors: True
+  access:
+    (): uvicorn.logging.AccessFormatter
+    format: '[%(asctime)s][%(levelname)s] [%(name)s]: %(message)s'
+    use_colors: True
+  json:
+    (): src.logging_config.CustomJsonFormatter
+    format: '%(module)s %(levelname)s %(asctime)s %(name)s %(message)s'
+    rename_fields:
+      levelname: lvl
+      asctime: ts
+      module: mod
+      name: nm
+      message: msg
+    json_ensure_ascii: False
+handlers:
+  default:
+    formatter: default
+    class: logging.StreamHandler
+    stream: ext://sys.stderr
+  access:
+    formatter: access
+    class: logging.StreamHandler
+    stream: ext://sys.stdout
+  file_handler:
+    formatter: json
+    class: logging.handlers.RotatingFileHandler
+    filename: logs/bot.log
+    maxBytes: 10485760 # 10MB
+    backupCount: 5
+    encoding: utf8
+loggers:
+  uvicorn:
+    handlers:
+      - default
+      - file_handler
+    level: DEBUG
+    propagate: False
+  uvicorn.error:
+    level: INFO
+    handlers:
+      - default
+      - file_handler
+    propagate: False
+  uvicorn.access:
+    level: INFO
+    handlers:
+      - access
+      - file_handler
+    propagate: False
+  watchfiles.main:
+    level: WARNING
+root:
+  level: DEBUG
+  handlers:
+    - default
+    - file_handler
+  propagate: False

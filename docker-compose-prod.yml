@@ -1,0 +1,33 @@
+services:
+
+  # backend:
+  #   image: aibushin/t_api-backend:latest
+  #   # В Coolify лучше использовать ENTRYPOINT/CMD, определенные в Dockerfile.
+  #   # Если команда make run нужна, лучше встроить ее в Dockerfile как CMD.
+  #   # command: make run 
+
+  #   # Volumes для исходного кода и migrations не нужны, если вы используете 
+  #   # готовый Docker-образ (image: ...), который уже содержит весь код. 
+  #   # Coolify монтирует persistency volumes, но не для исходников.
+  #   # volumes:
+  #   #   - ./backend:/app
+  #   #   - ./database/migrations:/app/migrations
+  #   #   - ./database/alembic.ini:/app/alembic.ini
+  #   #   - ./database/database.py:/app/src/database.py
+  #   #   - ./database/models.py:/app/src/api/models.py
+
+  #   # Определите порт, на котором слушает backend внутри контейнера
+  #   # (например, если это 8000). Замените 8000 на ваш реальный порт.
+  #   expose:
+  #     - "8000" 
+
+  #   # Переменные окружения для подключения к базе данных и другим сервисам
+  #   # (например, вы можете добавить здесь переменные, которые вы зададите 
+  #   # в интерфейсе Coolify, такие как DATABASE_URL)
+  #   environment:
+  #     # Пример переменной окружения (замените на свои)
+  #     # - DATABASE_URL=postgresql://user:password@db:5432/mydb 
+
+  nuxt:
+    image: aibushin/t_api-nuxt:latest
+    restart: unless-stopped

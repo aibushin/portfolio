@@ -1,0 +1,14 @@
+/* ===== Общий текст ===== */
+.prose {
+  @apply leading-relaxed text-[var(--ui-foreground)] max-w-none;
+}
+
+/* ===== Ссылки ===== */
+.prose a {
+  @apply text-[var(--ui-primary)] font-medium transition-colors underline underline-offset-2;
+  text-decoration-color: transparent;
+}
+.prose a:hover {
+  text-decoration-color: var(--ui-primary);
+  filter: brightness(1.15);
+}

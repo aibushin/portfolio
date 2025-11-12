@@ -1,0 +1,25 @@
+name: cleanup
+
+on: [workflow_call]
+
+# env:
+#   TEST_DIR: test_dir
+#   CODE_DIRS: backend invest_bot telegram_bot
+
+jobs:
+  delete_empty_files:
+    name: Deleting empty files and folders
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Set environment variables
+      #   run: |
+      #     echo "WORK_DIRS=$CODE_DIRS $TEST_DIR" >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Clear empty files & directories
+        run: |
+          # echo "WORK_DIRS: $WORK_DIRS"
+          while (( $(find . -not -path './postgres*' -empty | wc -l) > 0 )); do
+            echo "empty entities: $(find . -not -path './postgres*' -empty | wc -l)"
+            find . -not -path './postgres*' -empty -delete
+          done

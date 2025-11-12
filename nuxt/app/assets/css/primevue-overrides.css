@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  :root {
+    /* Primary */
+    --p-primary-color: theme(colors.blue.500);
+    --p-primary-hover-color: theme(colors.blue.600);
+    --p-primary-active-color: theme(colors.blue.700);
+    --p-primary-contrast-color: theme(colors.white);
+
+    /* Surfaces */
+    --p-surface-0: theme(colors.white);
+    --p-surface-50: theme(colors.zinc.50);
+    --p-surface-100: theme(colors.zinc.100);
+    --p-surface-200: theme(colors.zinc.200);
+    --p-surface-300: theme(colors.zinc.300);
+    --p-surface-400: theme(colors.zinc.400);
+    --p-surface-500: theme(colors.zinc.500);
+    --p-surface-600: theme(colors.zinc.600);
+    --p-surface-700: theme(colors.zinc.700);
+    --p-surface-800: theme(colors.zinc.800);
+    --p-surface-900: theme(colors.zinc.900);
+    --p-surface-950: theme(colors.zinc.950);
+
+    /* Text */
+    --p-text-color: theme(colors.gray.900);
+    --p-text-muted-color: theme(colors.gray.500);
+    --p-content-border-color: theme(colors.gray.200);
+
+    /* Status */
+    --p-success-color: theme(colors.green.500);
+    --p-success-contrast-color: theme(colors.white);
+
+    --p-info-color: theme(colors.sky.500);
+    --p-info-contrast-color: theme(colors.white);
+
+    --p-warning-color: theme(colors.amber.500);
+    --p-warning-contrast-color: theme(colors.black);
+
+    --p-danger-color: theme(colors.red.500);
+    --p-danger-contrast-color: theme(colors.white);
+  }
+
+  .dark {
+    /* Primary */
+    --p-primary-color: theme(colors.blue.400);
+    --p-primary-hover-color: theme(colors.blue.300);
+    --p-primary-active-color: theme(colors.blue.200);
+    --p-primary-contrast-color: theme(colors.black);
+
+    /* Surfaces */
+    --p-surface-0: theme(colors.white);
+    --p-surface-50: theme(colors.slate.50);
+    --p-surface-100: theme(colors.slate.100);
+    --p-surface-200: theme(colors.slate.200);
+    --p-surface-300: theme(colors.slate.300);
+    --p-surface-400: theme(colors.slate.400);
+    --p-surface-500: theme(colors.slate.500);
+    --p-surface-600: theme(colors.slate.600);
+    --p-surface-700: theme(colors.slate.700);
+    --p-surface-800: theme(colors.slate.800);
+    --p-surface-900: theme(colors.slate.900);
+    --p-surface-950: theme(colors.slate.950);
+
+    /* Text */
+    --p-text-color: theme(colors.gray.100);
+    --p-text-muted-color: theme(colors.gray.400);
+    --p-content-border-color: theme(colors.gray.600);
+
+    /* Status */
+    --p-success-color: theme(colors.green.400);
+    --p-success-contrast-color: theme(colors.black);
+
+    --p-info-color: theme(colors.sky.400);
+    --p-info-contrast-color: theme(colors.black);
+
+    --p-warning-color: theme(colors.amber.400);
+    --p-warning-contrast-color: theme(colors.black);
+
+    --p-danger-color: theme(colors.red.400);
+    --p-danger-contrast-color: theme(colors.black);
+  }
+}
+
+@layer utilities {
+  /* === Gradient Background Utilities === */
+
+  .bg-gradient-primary {
+    background: linear-gradient(to bottom, var(--p-primary-color) 0%, transparent 100%);
+  }
+
+  .bg-gradient-success {
+    background: linear-gradient(to bottom, var(--p-success-color) 0%, transparent 100%);
+  }
+
+  .bg-gradient-info {
+    background: linear-gradient(to bottom, var(--p-info-color) 0%, transparent 100%);
+  }
+
+  .bg-gradient-warning {
+    background: linear-gradient(to bottom, var(--p-warning-color) 0%, transparent 100%);
+  }
+
+  .bg-gradient-danger {
+    background: linear-gradient(to bottom, var(--p-danger-color) 0%, transparent 100%);
+  }
+
+  /* === Glow === */
+  .glow-hover {
+    position: relative;
+    transition: box-shadow .45s ease, transform .3s ease;
+    will-change: box-shadow, transform;
+  }
+  .glow-hover:hover {
+    box-shadow: 0 0 18px 4px color-mix(in srgb, var(--p-primary-color) 28%, transparent);
+    transform: translateY(-2px);
+  }
+}

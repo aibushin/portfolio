@@ -1,0 +1,18 @@
+/* ===== Горизонтальная линия и картинки ===== */
+
+/* ===== Горизонтальная линия ===== */
+.prose hr {
+  @apply my-10 border-0 h-[1px] w-full;
+  background: linear-gradient(to right, var(--p-primary-color), var(--p-info-color), transparent);
+  opacity: 0.7;
+}
+
+
+.prose img {
+  @apply my-6 rounded-lg shadow-md transition-transform duration-300;
+  max-width: 100%;
+  height: auto;
+}
+.prose img:hover {
+  @apply scale-[1.02] shadow-lg;
+}

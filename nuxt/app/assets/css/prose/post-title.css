@@ -1,0 +1,17 @@
+/* ===== Главный заголовок статьи ===== */
+.post-title {
+  @apply text-4xl md:text-5xl font-extrabold tracking-tight leading-tight;
+  @apply text-[var(--p-primary-color)];
+  background: linear-gradient(to right, var(--p-primary-color), var(--p-success-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-size: 200% 200%;
+  animation: gradient-x 6s ease infinite;
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}

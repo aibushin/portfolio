@@ -1,0 +1,10 @@
+@import './prose/base.css';
+@import './prose/headings.css';
+@import './prose/paragraphs.css';
+@import './prose/lists.css';
+@import './prose/code.css';
+@import './prose/quotes.css';
+@import './prose/tables.css';
+@import './prose/media.css';
+@import './prose/post-title.css';
+@import './prose/sections.css';

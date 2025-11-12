@@ -1,0 +1,13 @@
+{
+    "python.testing.pytestArgs": [
+        "-s",
+        "-v", // низкий уровень детализации
+        "-q", // уменьшает объем отображаемой информации
+        // "--cov=src"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    // "terminal.integrated.env.linux": {
+    //     "ENVIROMENT": "dev"
+    // },
+}

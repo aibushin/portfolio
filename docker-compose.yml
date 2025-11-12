@@ -1,0 +1,153 @@
+services:
+
+  postgres:
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Europe/Moscow
+      PGTZ: Europe/Moscow
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    expose:
+      - 5432
+    healthcheck:
+      test: "pg_isready -h postgres"
+      interval: 3s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile_uv
+      target: dev
+      args:
+        enviroment: ${ENVIROMENT:-dev}
+    command: make run
+    volumes:
+      - ./backend:/app
+      - ./database/migrations:/app/migrations
+      - ./database/alembic.ini:/app/alembic.ini
+      - ./database/database.py:/app/src/database.py
+      - ./database/models.py:/app/src/api/models.py
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  nuxt:
+    build:
+      context: ./nuxt
+      dockerfile: Dockerfile
+      target: build
+    # command: tail -f /dev/null
+    command: node .output/server/index.mjs
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./nuxt:/app
+    ports:
+      - 3000:3000
+
+  nginx:
+    image: nginx:stable
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - nuxt
+
+  # invest_bot:
+  #   build:
+  #     context: ./invest_bot
+  #     dockerfile: ../docker/Dockerfile
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ./invest_bot:/app
+  #   environment:
+  #     ENVIROMENT: ${ENVIROMENT:-test}
+  #     POETRY_VERSION: ${POETRY_VERSION:-1.8.3}
+  #     POSTGRES_URL: ${POSTGRES_URL}
+  #     INVEST_TOKEN: ${INVEST_TOKEN}
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+
+  # telegram_bot:
+  #   build:
+  #     context: ./telegram_bot
+  #     dockerfile: ../docker/Dockerfile
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ./telegram_bot:/app
+  #   environment:
+  #     ENVIROMENT: ${ENVIROMENT:-test}
+  #     POETRY_VERSION: ${POETRY_VERSION:-1.8.3}
+  #     POSTGRES_URL: ${POSTGRES_URL}
+  #     TG_API_TOKEN: ${TG_API_TOKEN}
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ./frontend:/app
+  #   ports:
+  #     - 3000:3000
+
+  # next:
+  #   build:
+  #     context: ./next
+  #     dockerfile: Dockerfile
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ./next:/app
+  #   ports:
+  #     - 3000:3000
+
+  # remix:
+  #   build:
+  #     context: ./remix
+  #     dockerfile: Dockerfile
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ./remix:/app
+  #   ports:
+  #     - 3000:3000
+
+  # vue:
+  #   build:
+  #     context: ./vue
+  #     dockerfile: Dockerfile
+  #     target: build
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ./vue:/app
+  #   ports:
+  #     - 3000:3000
+
+  # prime:
+  #   build:
+  #     context: ./primevue-examples
+  #     dockerfile: Dockerfile
+  #     target: build
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ./primevue-examples/nuxt-styled-tailwind:/app
+
+  # sakai:
+  #   build:
+  #     context: ./sakai-vue
+  #     dockerfile: Dockerfile
+  #     target: build
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - ./sakai-vue:/app

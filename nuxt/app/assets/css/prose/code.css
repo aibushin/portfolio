@@ -1,0 +1,17 @@
+/* ===== Inline code ===== */
+.prose :where(:not(pre) > code) {
+  @apply px-1.5 py-0.5 rounded text-sm font-mono font-medium shadow-sm;
+  background-color: var(--p-surface-200);
+  color: var(--p-text-color);
+}
+.dark .prose :where(:not(pre) > code) {
+  background-color: var(--p-surface-800);
+}
+
+/* ===== Code blocks ===== */
+.prose pre {
+  @apply rounded-lg p-4 overflow-x-auto text-sm leading-snug font-mono ring-1 shadow-md;
+  background-color: var(--p-surface-900);
+  color: var(--p-surface-50);
+  border: 1px solid var(--p-surface-700);
+}

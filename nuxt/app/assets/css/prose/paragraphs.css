@@ -1,0 +1,10 @@
+/* ===== Абзацы ===== */
+.prose p {
+  @apply my-4 text-lg text-[var(--p-text-muted-color)] font-normal leading-relaxed;
+}
+
+/* ===== Жирный текст ===== */
+.prose strong {
+  @apply font-semibold;
+  color: var(--p-text-color);
+}

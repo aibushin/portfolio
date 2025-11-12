@@ -1,0 +1,43 @@
+/* ===== Заголовки ===== */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+	@apply mt-10 mb-4 font-bold tracking-tight text-[var(--p-text-color)];
+}
+
+.prose h1 {
+	@apply text-3xl leading-tight md:text-4xl;
+}
+
+.prose h2 {
+	@apply relative mb-6 pb-2 text-2xl font-semibold;
+	color: var(--p-primary-color);
+}
+
+/* Добавляем градиентную линию под h2 */
+.prose h2::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	width: 100%;
+	background: linear-gradient(
+		to right,
+		var(--p-primary-color),
+		var(--p-info-color),
+		transparent
+	);
+	opacity: 0.7;
+}
+
+.prose h3 {
+	@apply text-xl font-semibold;
+	color: var(--p-primary-color);
+}
+
+.prose h4 {
+	@apply text-lg font-medium;
+	color: var(--p-primary-color);
+}

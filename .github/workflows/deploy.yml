@@ -1,0 +1,22 @@
+name: deploy
+
+on:
+  push:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  use_ci:
+    name: Use CI
+    uses: ./.github/workflows/ci.yml
+  deploy_to_coolify:
+    name: Deploy to Coolify
+    needs: [use_ci]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Deploy to Coolify
+        run: |
+          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'

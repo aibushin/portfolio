@@ -1,0 +1,20 @@
+FROM node:24.11.0-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+# RUN npm ci --production=false
+RUN npm ci --include=dev
+COPY . .
+ENV NODE_ENV=production
+RUN npm run build 
+
+FROM node:24.11.0-alpine AS runner
+WORKDIR /app
+COPY --from=builder /app/.output ./.output
+
+# Устанавливаем только prod-зависимости (если нужно)
+# RUN npm ci --omit=dev 
+
+ENV NODE_ENV=production
+EXPOSE 3000
+USER node
+CMD ["node", ".output/server/index.mjs"]

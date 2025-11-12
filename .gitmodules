@@ -1,0 +1,3 @@
+[submodule "info"]
+	path = info
+	url = git@github.com:aibushin/info.git

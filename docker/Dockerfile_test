@@ -1,0 +1,16 @@
+FROM python:3.11-slim-bookworm
+
+RUN apt-get update && apt-get install -y make curl jq
+
+# System deps:
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+# Copy only requirements to cache them in docker layer
+WORKDIR /app
+
+# Creating folders, and files for a project:
+COPY . .
+
+RUN mkdir -p logs
+
+# ENTRYPOINT ["tail", "-f", "/dev/null"]

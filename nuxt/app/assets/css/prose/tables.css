@@ -1,0 +1,15 @@
+/* ===== Таблицы ===== */
+.prose table { @apply w-full border-collapse my-6 text-sm; }
+.prose th, .prose td {
+  @apply px-3 py-2 border;
+  border-color: var(--p-content-border-color);
+}
+.prose th {
+  @apply font-semibold;
+  background-color: var(--p-surface-200);
+}
+.prose tr:nth-child(even) td {
+  background-color: var(--p-surface-50);
+}
+.dark .prose th { background-color: var(--p-surface-800); }
+.dark .prose tr:nth-child(even) td { background-color: var(--p-surface-900); }

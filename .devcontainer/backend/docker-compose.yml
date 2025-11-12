@@ -1,0 +1,30 @@
+services:
+
+  backend:
+    build:
+      args:
+        enviroment: test
+    command: tail -f /dev/null
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+      # - 5050:5050
+    restart: always
+    volumes:
+      - ./.git:/.git
+      - ./.devcontainer:/app/.devcontainer
+      - ./.env:/app/.env
+      - ./.github:/app/.github
+      - ./.gitignore:/app/.gitignore
+      - ./docker-compose.yml:/app/docker-compose.yml
+      - ./info:/app/info
+      - ./README.md:/app/README.md
+      - ./postgres:/app/postgres
+
+  # tuna:
+  #   image: yuccastream/tuna:latest
+  #   command: http backend:${BACKEND_PORT} --inspect=false
+  #   restart: always
+  #   environment:
+  #     TUNA_TOKEN: ${TUNA_TOKEN}
+  #   depends_on:
+  #     - backend
