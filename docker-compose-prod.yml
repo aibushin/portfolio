@@ -31,3 +31,4 @@ services:
   nuxt:
     image: aibushin/t_api-nuxt:latest
     restart: unless-stopped
+    pull_policy: always

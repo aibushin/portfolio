@@ -18,3 +18,7 @@ ENV NODE_ENV=production
 EXPOSE 3000
 USER node
 CMD ["node", ".output/server/index.mjs"]
+
+
+# docker build -f Dockerfile_prod -t aibushin/t_api-nuxt:latest .
+# docker push aibushin/t_api-nuxt:latest
