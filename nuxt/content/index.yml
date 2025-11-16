@@ -27,6 +27,32 @@ hero:
       alt: Random Image 8
     - src: /s3/hero/random-9.avif
       alt: Random Image 9
+  technologies:
+    - icon: mdi:api
+      name: API
+    - icon: mdi:wide-area-network
+      name: Architecture
+    - icon: mdi:server
+      name: Backend
+    - icon: mdi:database
+      name: Databases
+    - icon: mdi:shield-bug
+      name: Debugging
+    - icon: mdi:infinity-box
+      name: DevOps
+  technologiesReverse:
+    - icon: mdi:code-block-html
+      name: Frontend
+    - icon: mdi:scroll-text-outline
+      name: Logs
+    - icon: simple-icons:nuxt
+      name: Nuxt
+    - icon: mdi:power-socket-de
+      name: WebSockets
+    - icon: simple-icons:python
+      name: Python
+    - icon: mdi:language-python
+      name: Python
 about:
   title: 'Обо мне'
   description: |
@@ -40,21 +66,21 @@ experience:
       date: '2023 — наст. время'
       company:
         name: Сбер
-        logo: 'i-simple-icons-nuxtdotjs'
+        logo: 'mdi:bank'
         url: 'https://nuxt.com'
         color: '#00DC82'
     - position: 'Senior Python Developer'
-      date: '2022 - 2023'
+      date: '2021 - 2023'
       company:
         name: Сбер
-        logo: 'i-simple-icons-raycast'
+        logo: 'mdi:bank'
         url: 'https://raycast.com'
         color: '#FF6363'
     - position: 'Middle Python Developer'
       date: '2018 - 2021'
       company:
-        name: Linear
-        logo: 'i-simple-icons-linear'
+        name: Сбер
+        logo: 'mdi:bank'
         url: 'https://linear.app'
         color: '#5E6AD2'
 testimonials:

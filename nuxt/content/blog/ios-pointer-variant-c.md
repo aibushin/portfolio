@@ -3,12 +3,7 @@ title: "iOS‑Pointer курсор: архитектура, устойчивос
 description: "Разбор архитектуры: делегирование, фильтрация интерактивных элементов, сброс при навигации, исключение из ViewTransition, устойчивость к SSR/CSR."
 date: 2025-10-14
 image: /s3/blog/mouse-pointer-icons.avif
-tags:
-  - Nuxt 4
-  - Nuxt UI
-  - motion-v
-  - Architecture
-  - Debugging
+tags: ["Nuxt 4", "Nuxt UI", "motion-v", "Architecture", "Debugging"]
 ---
 
 ::callout{type="info"}
@@ -24,6 +19,7 @@ tags:
 ::
 
 ::code-collapse{title="Фильтрация ложных кликов"}
+
 ```ts
 function isTrulyClickable(el: HTMLElement): boolean {
   return !(el.tagName === 'A' && el.children.length === 1
@@ -31,6 +27,7 @@ function isTrulyClickable(el: HTMLElement): boolean {
     && el.children[0].classList.contains('absolute'))
 }
 ```
+
 ::
 
 ## Сброс состояния при навигации
@@ -42,23 +39,29 @@ function isTrulyClickable(el: HTMLElement): boolean {
 ## Исключение из ViewTransition
 
 ::code-collapse{title="CSS для исключения кастомного слоя из snapshot"}
+
 ```css
 [data-ios-cursor] { view-transition-name: none !important; }
 ```
+
 ::
 
 ## Полный компонент и интеграция
 
 ::code-collapse{title="Подключение в app/app.vue"}
+
 ```vue
 <IosPointer :enabled="useRuntimeConfig().public.iosPointerEnabled && useRoute().meta.iosPointer !== false" blendMode="difference" />
 ```
+
 ::
 
 ::code-collapse{title="app/assets/css/cursor.css"}
+
 ```css
 /* см. полный вариант в руководстве A */
 ```
+
 ::
 
 ## Отладка

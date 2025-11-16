@@ -3,12 +3,7 @@ title: "Создание iOS‑Pointer курсора для Nuxt 4"
 description: "Подробное руководство по созданию анимированного кастомного курсора в стиле iOS Pointer с использованием Motion One, Vue 3 Composition API и Nuxt UI v4."
 date: 2025-10-13
 image: /s3/blog/mouse-pointer-icons.avif
-tags:
-  - Nuxt 4
-  - Motion One
-  - Nuxt UI v4
-  - Frontend
-  - UX Design
+tags: ["Nuxt 4", "Motion One", "Nuxt UI v4", "Frontend", "UX Design"]
 ---
 
 ::callout{type="info" icon="i-lucide-mouse-pointer"}
@@ -37,6 +32,7 @@ tags:
 ## Этапы реализации
 
 ::steps
+
 ### 1. Подготовка окружения
 
 Убедиться, что в проекте установлены:
@@ -177,6 +173,7 @@ router.afterEach(() => handleLeave())
   </ClientOnly>
 </template>
 ```
+
 ::
 
 ### 3. Подключение в `app.vue`
@@ -201,6 +198,7 @@ const route = useRoute()
   </UApp>
 </template>
 ```
+
 ::
 
 ### 4. Стилизация курсора
@@ -237,6 +235,7 @@ body.cursor-active .clickable {
   pointer-events: none !important;
 }
 ```
+
 ::
 
 ::/steps

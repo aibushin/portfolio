@@ -3,12 +3,7 @@ title: "iOS‑Pointer курсор для Nuxt 4: полное руководс
 description: "Пошаговая реализация кастомного курсора на motion-v с делегированием событий, сбросом состояния при навигации и поддержкой ViewTransition."
 date: 2025-10-14
 image: /s3/blog/mouse-pointer-icons.avif
-tags:
-  - Nuxt 4
-  - Nuxt UI
-  - motion-v
-  - Frontend
-  - UX
+tags: ["Nuxt 4", "Nuxt UI", "motion-v", "Frontend", "UX",]
 features:
   - iosPointer
 ---
@@ -26,21 +21,27 @@ features:
 ## Установка и включение
 
 ::steps
+
 ### 1) Установка зависимостей
 
 ::code-group
+
 ```bash [npm]
 npm i motion-v @nuxt/ui @nuxt/content
 ```
+
 ```bash [pnpm]
 pnpm add motion-v @nuxt/ui @nuxt/content
 ```
+
 ```bash [yarn]
 yarn add motion-v @nuxt/ui @nuxt/content
 ```
+
 ```bash [bun]
 bun add motion-v @nuxt/ui @nuxt/content
 ```
+
 ::
 
 Добавить модули в `nuxt.config.ts`:
@@ -67,6 +68,7 @@ definePageMeta({ iosPointer: true })
 ## Компонент курсора
 
 ::code-collapse{title="Полный код app/components/IosPointer.vue (с комментариями)"}
+
 ```vue
 <script setup lang="ts">
 import { animate } from 'motion-v'          // Библиотека анимаций (Vue-обёртка)
@@ -274,6 +276,7 @@ const pointerColor = computed(() => colorMode.value === 'dark' ? 'bg-white' : 'b
   </ClientOnly>
 </template>
 ```
+
 ::
 
 ---
@@ -281,6 +284,7 @@ const pointerColor = computed(() => colorMode.value === 'dark' ? 'bg-white' : 'b
 ## Подключение в приложение
 
 ::code-collapse{title="Подключение в app/app.vue с пояснениями"}
+
 ```vue
 <script setup lang="ts">
 // 1) Читаем публичный флаг из конфига: включать ли кастомный курсор глобально
@@ -304,6 +308,7 @@ const route = useRoute()
   </UApp>
 </template>
 ```
+
 ::
 
 ---
@@ -311,6 +316,7 @@ const route = useRoute()
 ## Стили
 
 ::code-collapse{title="app/assets/css/cursor.css — комментарии и правила"}
+
 ```css
 /* Системный курсор скрывается ТОЛЬКО когда на <body> висит класс .cursor-active */
 body.cursor-active,
@@ -341,6 +347,7 @@ body.cursor-active .clickable {
   pointer-events: none !important;
 }
 ```
+
 ::
 
 ::callout{type="info" icon="i-lucide-file-code"}

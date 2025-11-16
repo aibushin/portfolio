@@ -27,6 +27,12 @@ const createImageSchema = () =>
 		alt: z.string(),
 	});
 
+const createTechnologiesSchema = () =>
+	z.object({
+		icon: z.string(),
+		name: z.string(),
+	});
+
 const createAuthorSchema = () =>
 	z.object({
 		name: z.string(),
@@ -52,6 +58,8 @@ export default defineContentConfig({
 				hero: z.object({
 					links: z.array(createButtonSchema()),
 					images: z.array(createImageSchema()),
+					technologies: z.array(createTechnologiesSchema()),
+					technologiesReverse: z.array(createTechnologiesSchema()),
 				}),
 				about: createBaseSchema(),
 				experience: createBaseSchema().extend({

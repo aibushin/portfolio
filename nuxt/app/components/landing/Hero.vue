@@ -33,11 +33,12 @@
 					delay: 0.1,
 				}"
 			>
-				<UColorModeAvatar
-					class="ring-default size-18 ring ring-offset-3 ring-offset-(--ui-bg)"
-					:light="global.picture?.light!"
-					:dark="global.picture?.dark!"
-					:alt="global.picture?.alt!"
+				<NuxtImg
+					class="ring-default size-36 rounded-full ring ring-offset-3 ring-offset-(--ui-bg)"
+					:src="global.picture?.light!"
+					width="150"
+					height="150"
+					draggable="false"
 				/>
 			</Motion>
 		</template>
@@ -110,7 +111,7 @@
 						:to="global.available ? '/about' : ''"
 						:label="
 							global.available
-								? 'Доступен для новый проектов'
+								? 'Доступен для новых проектов'
 								: 'Недоступен в данный момент'
 						"
 					>
@@ -158,36 +159,24 @@
 			</div>
 		</template>
 
-		<UMarquee
-			pause-on-hover
-			class="-mx-8 py-2 [--duration:40s] sm:-mx-12 lg:-mx-16"
-		>
-			<Motion
-				v-for="(img, index) in page.hero.images"
+		<UMarquee pause-on-hover class="pt-16">
+			<ULink
+				v-for="(tech, index) in page.hero.technologies"
 				:key="index"
-				:initial="{
-					scale: 1.1,
-					opacity: 0,
-					filter: 'blur(20px)',
-				}"
-				:animate="{
-					scale: 1,
-					opacity: 1,
-					filter: 'blur(0px)',
-				}"
-				:transition="{
-					duration: 0.6,
-					delay: index * 0.1,
-				}"
+				:to="{ path: '/blog', query: { tag: tech.name } }"
 			>
-				<NuxtImg
-					width="234"
-					height="234"
-					class="aspect-square rounded-lg object-cover"
-					:class="index % 2 === 0 ? '-rotate-2' : 'rotate-2'"
-					v-bind="img"
-				/>
-			</Motion>
+				<UIcon :name="tech.icon" class="size-12 shrink-0" />
+			</ULink>
+		</UMarquee>
+
+		<UMarquee pause-on-hover reverse>
+			<ULink
+				v-for="(tech, index) in page.hero.technologiesReverse"
+				:key="index"
+				:to="{ path: '/blog', query: { tag: tech.name } }"
+			>
+				<UIcon :name="tech.icon" class="size-12 shrink-0" />
+			</ULink>
 		</UMarquee>
 	</UPageHero>
 </template>

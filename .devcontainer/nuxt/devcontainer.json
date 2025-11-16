@@ -1,6 +1,6 @@
 {
 	"name": "nuxt",
-	"dockerComposeFile": ["../../docker-compose.yml", "docker-compose.yml"],
+	"dockerComposeFile": ["../../docker-compose.dev.yml", "docker-compose.yml"],
 	"service": "nuxt",
 	"workspaceFolder": "/app",
 	"shutdownAction": "none",
@@ -32,7 +32,9 @@
 				"bradlc.vscode-tailwindcss",
 				"Vue.volar",
 				"esbenp.prettier-vscode",
-				"ryu1kn.partial-diff"
+				"ryu1kn.partial-diff",
+				"DavidAnson.vscode-markdownlint",
+				"yzhang.markdown-all-in-one"
 			]
 		}
 	}

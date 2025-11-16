@@ -9,6 +9,7 @@
 			fatal: true,
 		});
 	}
+
 	const { data: posts } = await useAsyncData('blogs', () =>
 		queryCollection('blog').order('date', 'DESC').all()
 	);
@@ -20,11 +21,45 @@
 		});
 	}
 
+	const route = useRoute();
+
+	const activeTag = computed(() => {
+		const raw = route.query.tag;
+		if (!raw) return undefined;
+		return Array.isArray(raw) ? raw[0] : String(raw);
+	});
+
+	const filteredPosts = computed(() => {
+		if (!posts.value) return [];
+		if (!activeTag.value) return posts.value;
+
+		const tagLower = activeTag.value.toLowerCase();
+
+		return posts.value.filter((post: any) =>
+			Array.isArray(post.tags)
+				? post.tags.some((t: string) => t.toLowerCase() === tagLower)
+				: false
+		);
+	});
+
+	// Базовые значения из страницы
+	const baseTitle = computed(() => page.value?.seo?.title || page.value?.title);
+	const baseDesc = computed(
+		() => page.value?.seo?.description || page.value?.description
+	);
+
+	// Динамический SEO: заголовок меняется при смене tag
 	useSeoMeta({
-		title: page.value?.seo?.title || page.value?.title,
-		ogTitle: page.value?.seo?.title || page.value?.title,
-		description: page.value?.seo?.description || page.value?.description,
-		ogDescription: page.value?.seo?.description || page.value?.description,
+		title: () =>
+			activeTag.value
+				? `${activeTag.value} · ${baseTitle.value}`
+				: baseTitle.value,
+		ogTitle: () =>
+			activeTag.value
+				? `${activeTag.value} · ${baseTitle.value}`
+				: baseTitle.value,
+		description: baseDesc,
+		ogDescription: baseDesc,
 	});
 </script>
 
@@ -40,14 +75,34 @@
 				links: 'justify-start',
 			}"
 		/>
-		<UPageSection
-			:ui="{
-				container: '!pt-0',
-			}"
-		>
-			<UBlogPosts orientation="vertical">
+
+		<UPageSection :ui="{ container: '!pt-0' }">
+			<!-- Индикация активного фильтра по тегу -->
+			<div class="mb-4 flex flex-wrap items-center gap-2">
+				<span v-if="activeTag" class="text-sm text-gray-400">
+					Фильтр по тегу:
+				</span>
+				<UBadge v-if="activeTag" color="primary" variant="subtle">
+					{{ activeTag }}
+				</UBadge>
+
+				<ULink
+					v-if="activeTag"
+					to="/blog"
+					class="text-xs text-gray-400 hover:text-gray-200"
+				>
+					Сбросить фильтр
+				</ULink>
+			</div>
+
+			<!-- Если нечего показать под фильтром -->
+			<div v-if="!filteredPosts.length" class="text-sm text-gray-400">
+				По тегу «{{ activeTag }}» пока нет статей.
+			</div>
+
+			<UBlogPosts v-else orientation="vertical">
 				<Motion
-					v-for="(post, index) in posts"
+					v-for="(post, index) in filteredPosts"
 					:key="index"
 					:initial="{ opacity: 0, transform: 'translateY(10px)' }"
 					:while-in-view="{ opacity: 1, transform: 'translateY(0)' }"

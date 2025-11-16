@@ -33,11 +33,12 @@
 				links: 'justify-start',
 			}"
 		>
-			<UColorModeAvatar
+			<NuxtImg
 				class="ring-default size-36 rounded-lg ring ring-offset-3 ring-offset-(--ui-bg) sm:rotate-4"
-				:light="global.picture?.light!"
-				:dark="global.picture?.dark!"
-				:alt="global.picture?.alt!"
+				:src="global.picture?.light!"
+				width="150"
+				height="150"
+				draggable="false"
 			/>
 		</UPageHero>
 		<UPageSection

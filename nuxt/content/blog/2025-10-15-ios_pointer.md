@@ -3,12 +3,7 @@ title: 'Nuxt UI Prose Samples'
 description: 'Разбираем путь создания кастомного iOS-курсор-эффекта на Nuxt 4 с Motion One, все баги, глитчи и архитектурные решения'
 date: 2025-10-15
 image: /s3/blog/og.avif
-tags:
-  - Nuxt 4
-  - Motion One
-  - Vue 3
-  - Frontend
-  - UX Design
+tags: ["Nuxt 4", "Motion One", "Vue 3", "Frontend", "UX Design"]
 minRead: 8
 author:
   name: Антон Бушин
@@ -24,7 +19,9 @@ features:
 ::accordion
 ---
 defaultValue:
-  - '1'
+
+- '1'
+
 ---
 
 ::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide-circle-help"}
@@ -40,7 +37,6 @@ Yes! Nuxt UI is used in production by thousands of applications with extensive t
 ::
 
 ::
-
 
 ## Badge
 
